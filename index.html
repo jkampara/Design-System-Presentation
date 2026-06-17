@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day" data-typography="default" data-spacing="default" data-radii="default">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Agent-First Design System</title>
+  <link rel="stylesheet" href="https://sfdc-ui-documentation-667d4c5e8394.herokuapp.com/salesforce-tokens/tokens.css">
+  <link rel="stylesheet" href="https://sfdc-ui-documentation-667d4c5e8394.herokuapp.com/salesforce-tokens/fonts.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="deck" id="deck"></div>
+
+<!-- ═══════════════════════ Navigation Bar ═══════════════════════ -->
+<nav class="nav-bar">
+  <span class="nav-label" id="slide-label"></span>
+  <div class="nav-dots">
+    <button class="nav-dot active" onclick="goToSlide(0)"></button>
+    <button class="nav-dot" onclick="goToSlide(1)"></button>
+    <button class="nav-dot" onclick="goToSlide(2)"></button>
+    <button class="nav-dot" onclick="goToSlide(3)"></button>
+    <button class="nav-dot" onclick="goToSlide(4)"></button>
+    <button class="nav-dot" onclick="goToSlide(5)"></button>
+    <button class="nav-dot" onclick="goToSlide(6)"></button>
+  </div>
+  <div class="nav-arrows">
+    <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" disabled><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="nav-btn" id="btn-next" onclick="navigate(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="nav-btn" id="btn-fullscreen" onclick="toggleFullscreen()" title="Presentation mode (F)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</nav>
+
+<script>
+  const slideFiles = [
+    'slides/slide-0-title.html',
+    'slides/slide-1-paradigm.html',
+    'slides/slide-2-demystifying.html',
+    'slides/slide-3-foundation.html',
+    'slides/slide-4-rules.html',
+    'slides/slide-5-ecosystem.html',
+    'slides/slide-5-thankyou.html'
+  ];
+
+  const deck = document.getElementById('deck');
+
+  const bust = Date.now();
+  Promise.all(slideFiles.map(f => fetch(f + '?v=' + bust).then(r => r.text())))
+    .then(contents => {
+      deck.innerHTML = contents.join('\n');
+      const scriptEl = document.createElement('script');
+      scriptEl.src = 'script.js?v=' + bust;
+      document.body.appendChild(scriptEl);
+    });
+</script>
+
+</body>
+</html>

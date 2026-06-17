@@ -1,0 +1,134 @@
+<!-- ═══════════════════════ SLIDE 3 ═══════════════════════ -->
+<section class="slide slide-3" data-slide="3">
+  <div class="stagger slide-eyebrow">03 &mdash; Current State</div>
+  <h1 class="stagger slide-title">Where Are We <span class="accent">Today</span></h1>
+  <p class="stagger slide-subtitle">
+    Before we build the future, we need to be honest about what exists. Our design system landscape
+    is fragmented across systems, tech stacks, and CSS practices &mdash; making agent adoption harder than it needs to be.
+  </p>
+
+  <div class="stagger state-grid">
+
+    <!-- Card 1: Scattered UI Systems -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x1f4e6;</span>
+        <span class="state-card-title">Scattered UI Systems</span>
+      </div>
+      <p class="state-card-desc">
+        Experience Library covers ~80% of components through blades and shared UI, but major MFEs operate
+        on entirely separate systems.
+      </p>
+      <div class="state-card-tags">
+        <span class="state-tag state-tag--primary">Experience Library</span>
+        <span class="state-tag state-tag--secondary">IDX</span>
+        <span class="state-tag state-tag--secondary">AFE</span>
+        <span class="state-tag state-tag--secondary">OGX</span>
+      </div>
+      <p class="state-card-impact">Each MFE maintains its own component set, duplicating effort and diverging from the core system.</p>
+    </div>
+
+    <!-- Card 2: No Singular Tech Stack -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x2699;</span>
+        <span class="state-card-title">No Singular Tech Stack</span>
+      </div>
+      <p class="state-card-desc">
+        Different teams use different frameworks and rendering approaches. There&rsquo;s no single
+        stack that all surfaces build on.
+      </p>
+      <div class="state-card-highlight">
+        <span class="state-highlight-label">Intent</span>
+        <span class="state-highlight-value">Converge on a unified tech stack across all surfaces</span>
+      </div>
+      <p class="state-card-impact">Migration and new feature work is slow because every surface requires different implementation patterns.</p>
+    </div>
+
+    <!-- Card 3: CSS Without Semantic Layers -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x1f3a8;</span>
+        <span class="state-card-title">CSS Without Semantic Layers</span>
+      </div>
+      <p class="state-card-desc">
+        We don&rsquo;t use semantic variables or global aliases today. Raw hex values and one-off
+        styles are scattered across the codebase.
+      </p>
+      <div class="state-card-comparison">
+        <div class="state-compare-col state-compare--bad">
+          <span class="state-compare-label">Today</span>
+          <code>color: #032D60;</code>
+          <code>background: #FFFFFF;</code>
+        </div>
+        <div class="state-compare-col state-compare--good">
+          <span class="state-compare-label">Needed</span>
+          <code>color: var(--color-on-surface-1);</code>
+          <code>background: var(--color-surface-1);</code>
+        </div>
+      </div>
+      <p class="state-card-impact">No theming possible. Multi-brand adoption (Salesforce+, Slack) requires rewriting CSS, not flipping an attribute.</p>
+    </div>
+
+    <!-- Card 4: Too Many Blades & Cards -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x1f4cb;</span>
+        <span class="state-card-title">Too Many Blades &amp; Cards</span>
+      </div>
+      <p class="state-card-desc">
+        A long, growing list of blade and card variants makes maintenance costly and introduces ambiguity
+        for both humans and AI.
+      </p>
+      <div class="state-card-stat-row">
+        <div class="state-stat">
+          <span class="state-stat-num">25+</span>
+          <span class="state-stat-label">Blade variants</span>
+        </div>
+        <div class="state-stat-divider"></div>
+        <div class="state-stat">
+          <span class="state-stat-num">15+</span>
+          <span class="state-stat-label">Card types</span>
+        </div>
+      </div>
+      <p class="state-card-impact">More choices = more error-prone. LLMs struggle to pick the right component when the catalog is ambiguous and overlapping.</p>
+    </div>
+
+    <!-- Card 5: Non-Interactive Storybook -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x1f4d6;</span>
+        <span class="state-card-title">Non-Interactive Storybook</span>
+      </div>
+      <p class="state-card-desc">
+        Our Storybook today is a static visual reference &mdash; useful for humans browsing, but not built for
+        programmatic consumption or automated workflows.
+      </p>
+      <ul class="state-card-list">
+        <li>No machine-readable test harnesses that LLMs can invoke to validate output</li>
+        <li>No interaction stories that demonstrate state transitions, props combinations, or edge cases</li>
+        <li>No API for agents to query component capabilities, required props, or slot structures</li>
+        <li>Visual regression tests exist but aren&rsquo;t wired into any agent feedback loop</li>
+      </ul>
+      <p class="state-card-impact">An interactive, API-driven Storybook would let LLMs test renders, verify constraints, and self-correct before shipping code.</p>
+    </div>
+
+    <!-- Card 6: No Vendor Documentation Vision -->
+    <div class="state-card">
+      <div class="state-card-header">
+        <span class="state-card-icon">&#x1f4b8;</span>
+        <span class="state-card-title">No Vendor Documentation Strategy</span>
+      </div>
+      <p class="state-card-desc">
+        External vendors build custom open blades from scratch because there&rsquo;s no documentation
+        guiding them to reuse our existing component library.
+      </p>
+      <div class="state-card-highlight">
+        <span class="state-highlight-label">Cost</span>
+        <span class="state-highlight-value">Every vendor-built blade is a one-off &mdash; expensive to create, review, and maintain long-term</span>
+      </div>
+      <p class="state-card-impact">With clear component docs and composable APIs, vendors could assemble pages from our system &mdash; faster delivery, lower cost, brand-safe output.</p>
+    </div>
+
+  </div>
+</section>

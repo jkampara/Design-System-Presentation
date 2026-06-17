@@ -1,0 +1,520 @@
+<!-- ═══════════════════════ SLIDE 2 ═══════════════════════ -->
+<section class="slide slide-2" data-slide="2">
+  <div class="stagger slide-eyebrow">02 &mdash; How It Actually Works</div>
+  <h1 class="stagger slide-title">The LLM <span class="accent">Routing Journey</span></h1>
+  <p class="stagger slide-subtitle">
+    When a user prompts &ldquo;build me a page,&rdquo; the LLM follows a structured path.
+    At every decision point it consults the design system. Click a connection line or a card to learn more.
+  </p>
+
+  <div class="stagger journey-toggle-wrap">
+    <span class="journey-toggle-label">Recipe Exists</span>
+    <button class="journey-toggle" id="journeyToggle" onclick="toggleJourneyPath(this.classList.contains('active') ? 'recipe' : 'no-recipe')" role="switch" aria-checked="true">
+      <span class="journey-toggle-thumb"></span>
+    </button>
+    <span class="journey-toggle-value" id="journeyToggleValue">Yes</span>
+  </div>
+
+  <!-- Three-column layout: DS (left) | Steps (center) | Agents (right) -->
+  <div class="stagger journey-layout" id="journeyLayout" data-path="recipe">
+
+    <!-- LEFT: Design System column (vertical) -->
+    <div class="journey-ds-col">
+      <div class="journey-ds-col-title">Design System Agent / Skill / Plugin</div>
+      <div class="journey-ds-card" id="ds-schema" onclick="openDsCardOverlay('schema')">
+        <span class="journey-ds-card-icon">&#x1f5c2;</span>
+        <span class="journey-ds-card-label">Schema</span>
+        <span class="journey-ds-card-sub">Intent map &amp; template catalog</span>
+      </div>
+      <div class="journey-ds-card" id="ds-recipes" onclick="openDsCardOverlay(document.getElementById('journeyLayout').dataset.path === 'no-recipe' ? 'guidelines' : 'recipes')">
+        <span class="journey-ds-card-icon path-recipe">&#x1f9e9;</span>
+        <span class="journey-ds-card-icon path-no-recipe">&#x1f4d0;</span>
+        <span class="journey-ds-card-label path-recipe">Recipes</span>
+        <span class="journey-ds-card-label path-no-recipe">Guidelines</span>
+        <span class="journey-ds-card-sub path-recipe">Page &amp; blade skeletons</span>
+        <span class="journey-ds-card-sub path-no-recipe">Component rules</span>
+      </div>
+      <div class="journey-ds-card" id="ds-tokens" onclick="openDsCardOverlay('tokens')">
+        <span class="journey-ds-card-icon">&#x1f3a8;</span>
+        <span class="journey-ds-card-label">Tokens</span>
+        <span class="journey-ds-card-sub">Color, type, spacing, radii</span>
+      </div>
+      <div class="journey-ds-card" id="ds-constraints" onclick="openDsCardOverlay('constraints')">
+        <span class="journey-ds-card-icon">&#x26d4;</span>
+        <span class="journey-ds-card-label">Constraints</span>
+        <span class="journey-ds-card-sub">Rules &amp; coverage checks</span>
+      </div>
+    </div>
+
+    <!-- SVG layer for connecting lines -->
+    <svg class="journey-lines" id="journeyLines"></svg>
+
+    <!-- CENTER: Journey Steps -->
+    <div class="journey-steps">
+      <div class="journey-step" id="step-1">
+        <div class="journey-step-num">1</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title">User Prompt</div>
+          <div class="journey-step-desc">&ldquo;Build a product launch page for Agentforce with hero, features grid, and CTA.&rdquo;</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-2" data-connects="schema">
+        <div class="journey-step-num">2</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title">Parse Intent</div>
+          <div class="journey-step-desc path-recipe">LLM checks the schema to see what page types and templates are available, then maps the request to a known pattern.</div>
+          <div class="journey-step-desc path-no-recipe">LLM checks the schema but finds no matching template. The request doesn&rsquo;t fit any existing recipe &mdash; a new composition is needed.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-3" data-connects="recipes">
+        <div class="journey-step-num">3</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title path-recipe">Select Template</div>
+          <div class="journey-step-title path-no-recipe">Assemble from Components</div>
+          <div class="journey-step-desc path-recipe">Picks the right page skeleton &mdash; hero + grid + CTA layout &mdash; from the recipe catalog with typed blade slots.</div>
+          <div class="journey-step-desc path-no-recipe">Uses component-level guidelines to compose a new layout. Each component has documented rules for sizing, spacing, and allowed combinations.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-4">
+        <div class="journey-step-num">4</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title">Fetch Content</div>
+          <div class="journey-step-desc">Pulls existing copy, product data, and messaging from CMS. Generates new copy where gaps exist.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-5">
+        <div class="journey-step-num">5</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title">Fetch Assets</div>
+          <div class="journey-step-desc">Retrieves images, illustrations, and icons from DAM based on layout slots to fill.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-6" data-connects="tokens">
+        <div class="journey-step-num">6</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title">Compose Page</div>
+          <div class="journey-step-desc">Populates each blade with content and assets, applying tokens for color, type, and spacing.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step" id="step-7" data-connects="constraints">
+        <div class="journey-step-num">7</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title path-recipe">Validate Output</div>
+          <div class="journey-step-title path-no-recipe">Strict Validate + Flag</div>
+          <div class="journey-step-desc path-recipe">Checks every element against constraints and coverage. Non-compliant or uncovered concerns are rejected.</div>
+          <div class="journey-step-desc path-no-recipe">Tighter validation since no pre-approved recipe was used. Uncovered concerns and novel compositions are flagged for human review.</div>
+        </div>
+      </div>
+
+      <div class="journey-connector"></div>
+
+      <div class="journey-step journey-step--final" id="step-8">
+        <div class="journey-step-num path-recipe">&#x2713;</div>
+        <div class="journey-step-num path-no-recipe">&#x21bb;</div>
+        <div class="journey-step-body">
+          <div class="journey-step-title path-recipe">Render Surface</div>
+          <div class="journey-step-title path-no-recipe">Propose for Review</div>
+          <div class="journey-step-desc path-recipe">Brand-faithful page delivered to web, app, email, or any target &mdash; zero manual wiring.</div>
+          <div class="journey-step-desc path-no-recipe">New composition is proposed to a designer for approval. Once approved, it becomes a new recipe in the catalog.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Other Agents column (vertical) -->
+    <div class="journey-agents-col">
+      <div class="journey-agents-col-title">Other Agents, Skills &amp; Plugins</div>
+      <div class="journey-ds-card journey-agent-card" id="agent-content" onclick="openAgentOverlay('content')">
+        <span class="journey-ds-card-icon">&#x1f4dd;</span>
+        <span class="journey-ds-card-label">Content Agent</span>
+        <span class="journey-ds-card-sub">CMS copy &amp; brand voice</span>
+      </div>
+      <div class="journey-ds-card journey-agent-card" id="agent-media" onclick="openAgentOverlay('media')">
+        <span class="journey-ds-card-icon">&#x1f5bc;</span>
+        <span class="journey-ds-card-label">Media Agent</span>
+        <span class="journey-ds-card-sub">DAM images &amp; assets</span>
+      </div>
+      <div class="journey-ds-card journey-agent-card" id="agent-seo" onclick="openAgentOverlay('seo')">
+        <span class="journey-ds-card-icon">&#x1f50d;</span>
+        <span class="journey-ds-card-label">SEO Agent</span>
+        <span class="journey-ds-card-sub">Metadata &amp; structure</span>
+      </div>
+      <div class="journey-ds-card journey-agent-card journey-agent-card--more" id="agent-more">
+        <span class="journey-ds-card-icon">+</span>
+        <span class="journey-ds-card-label">More as needed</span>
+        <span class="journey-ds-card-sub">A/B, accessibility, analytics</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay: connection lines (Step → DS component) -->
+  <div class="journey-overlay" id="journeyOverlay" onclick="closeJourneyOverlay(event)">
+    <div class="journey-overlay-card" data-journey="schema">
+      <button class="journey-overlay-close" onclick="closeJourneyOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f5c2;</span>
+        <span class="journey-overlay-title">Parse Intent &rarr; Schema</span>
+      </div>
+      <div class="journey-overlay-body">
+        The LLM reads the <strong>schema</strong> to discover which page types, section patterns,
+        and component combinations are available. Instead of inventing a layout, it maps
+        &ldquo;product launch with hero + grid + CTA&rdquo; to a known template entry &mdash;
+        the intent is resolved to a concrete recipe name before anything is built.
+      </div>
+    </div>
+    <div class="journey-overlay-card" data-journey="recipes">
+      <button class="journey-overlay-close" onclick="closeJourneyOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f9e9;</span>
+        <span class="journey-overlay-title">Select Template &rarr; Recipes</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Recipes</strong> define canonical page skeletons with typed slots.
+        The LLM selects the matching recipe and reads its blade definitions &mdash;
+        each slot declares what it expects (image ratio, text length, CTA style)
+        so the page structure is fixed and content is variable.
+      </div>
+    </div>
+    <div class="journey-overlay-card" data-journey="guidelines">
+      <button class="journey-overlay-close" onclick="closeJourneyOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f4d0;</span>
+        <span class="journey-overlay-title">Assemble &rarr; Component Guidelines</span>
+      </div>
+      <div class="journey-overlay-body">
+        No pre-built recipe exists, so the LLM falls back to <strong>component-level guidelines</strong>.
+        Each component documents its allowed sizes, spacing, combination rules, and content requirements.
+        The LLM assembles a new layout from these primitives &mdash; acting as a proposer, not just a populator.
+      </div>
+    </div>
+    <div class="journey-overlay-card" data-journey="tokens">
+      <button class="journey-overlay-close" onclick="closeJourneyOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f3a8;</span>
+        <span class="journey-overlay-title">Compose Page &rarr; Tokens</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Tokens</strong> provide every visual decision as structured values.
+        The LLM references semantic tokens like <code>--color-fill-accent</code> instead of
+        guessing hex codes. Theme switching (Day/Night) is a single attribute change, not a rewrite.
+      </div>
+    </div>
+    <div class="journey-overlay-card" data-journey="constraints">
+      <button class="journey-overlay-close" onclick="closeJourneyOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x26d4;</span>
+        <span class="journey-overlay-title">Validate Output &rarr; Constraints</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Constraints</strong> enforce hard rules &mdash; no invented hex codes, hero-only Display 1,
+        pill-shaped buttons. <strong>Coverage data</strong> tells the validator what is tokenized
+        vs. what needs human judgment. Uncovered concerns trigger a hard stop instead of hallucination.
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay: DS card detail (clicked directly on DS cards) -->
+  <div class="journey-overlay" id="dsCardOverlay" onclick="closeDsCardOverlay(event)">
+
+    <div class="journey-overlay-card ds-detail-card" data-ds="schema">
+      <button class="journey-overlay-close" onclick="closeDsCardOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f5c2;</span>
+        <span class="journey-overlay-title">Schema</span>
+      </div>
+      <div class="journey-overlay-body">
+        The <strong>schema</strong> is the design system&rsquo;s table of contents &mdash; a machine-readable
+        registry of every page type, section pattern, and component available. When the LLM receives a user
+        prompt, it checks the schema first to resolve intent into a known template name.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Example &mdash; schema.json</div>
+        <pre class="ds-detail-code">{
+  "pageTypes": {
+    "product-launch": {
+      "description": "Hero + features grid + CTA banner",
+      "allowedBlades": ["hero", "feature-grid", "cta-banner"],
+      "intents": ["launch", "announce", "promote product"]
+    },
+    "event-landing": {
+      "description": "Hero + agenda + speakers + register",
+      "allowedBlades": ["hero", "schedule", "speaker-grid", "cta-banner"],
+      "intents": ["event", "conference", "webinar"]
+    },
+    "content-hub": {
+      "description": "Category nav + card grid + pagination",
+      "allowedBlades": ["filter-bar", "card-grid", "pagination"],
+      "intents": ["blog", "resources", "library"]
+    }
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card ds-detail-card" data-ds="recipes">
+      <button class="journey-overlay-close" onclick="closeDsCardOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f9e9;</span>
+        <span class="journey-overlay-title">Recipes</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Recipes</strong> are canonical page and component skeletons with typed slots.
+        They define structure, not content &mdash; any consumer fills the slots with real data.
+        The LLM picks a recipe, then populates each blade with CMS content and DAM assets.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Example &mdash; Product Launch recipe</div>
+        <pre class="ds-detail-code">{
+  "recipe": "product-launch",
+  "blades": [
+    {
+      "type": "hero",
+      "slots": {
+        "headline": { "maxLength": 60 },
+        "subhead":  { "maxLength": 120 },
+        "image":    { "ratio": "16:9" },
+        "cta":      { "style": "primary" }
+      }
+    },
+    {
+      "type": "feature-grid",
+      "slots": {
+        "columns": 3,
+        "card": { "icon": true, "title": true, "body": true }
+      }
+    },
+    {
+      "type": "cta-banner",
+      "slots": { "headline": true, "cta": { "style": "primary" } }
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card ds-detail-card" data-ds="guidelines">
+      <button class="journey-overlay-close" onclick="closeDsCardOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f4d0;</span>
+        <span class="journey-overlay-title">Component Guidelines</span>
+      </div>
+      <div class="journey-overlay-body">
+        When no recipe matches, the LLM falls back to <strong>component-level guidelines</strong>.
+        Each component documents its sizing, spacing, allowed nesting, and combination rules.
+        The LLM assembles a new page from these primitives, constrained by what each component permits.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Example &mdash; component guidelines</div>
+        <pre class="ds-detail-code">{
+  "components": {
+    "hero": {
+      "maxPerPage": 1,
+      "position": "first-blade-only",
+      "slots": {
+        "headline": { "maxLength": 60, "font": "display-3" },
+        "image": { "ratio": ["16:9", "21:9"] }
+      }
+    },
+    "card": {
+      "allowedIn": ["grid", "carousel", "split"],
+      "variants": ["default", "icon-top", "image-top"],
+      "spacing": { "gap": "space-content-md" }
+    },
+    "cta-banner": {
+      "position": "last-blade-preferred",
+      "maxButtons": 2,
+      "buttonStyles": ["primary", "secondary"]
+    }
+  },
+  "nesting": {
+    "grid": { "minColumns": 2, "maxColumns": 4 },
+    "split": { "ratio": ["50:50", "60:40", "40:60"] }
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card ds-detail-card" data-ds="tokens">
+      <button class="journey-overlay-close" onclick="closeDsCardOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f3a8;</span>
+        <span class="journey-overlay-title">Tokens</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Tokens</strong> encode every visual decision &mdash; color, typography, spacing, radii &mdash;
+        as structured key-value pairs published as CSS custom properties and JSON.
+        Semantic tokens reference primitives, so switching themes requires zero code changes.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Example &mdash; Semantic color tokens</div>
+        <pre class="ds-detail-code">/* Day theme */
+[data-theme="day"] {
+  --color-fill-accent:      #066AFE;
+  --color-on-fill-accent:   #FFFFFF;
+  --color-surface-1:        #FFFFFF;
+  --color-on-surface-1:     #181818;
+  --color-border-accent:    #022AC0;
+}
+
+/* Night theme — same names, different values */
+[data-theme="night"] {
+  --color-fill-accent:      #90D0FE;
+  --color-on-fill-accent:   #001D3D;
+  --color-surface-1:        #1A1A2E;
+  --color-on-surface-1:     #F0F0F0;
+  --color-border-accent:    #5B9CF6;
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card ds-detail-card" data-ds="constraints">
+      <button class="journey-overlay-close" onclick="closeDsCardOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x26d4;</span>
+        <span class="journey-overlay-title">Constraints</span>
+      </div>
+      <div class="journey-overlay-body">
+        <strong>Constraints</strong> combine hard rules with coverage data. Rules define what must always be true.
+        Coverage declares what&rsquo;s tokenized (safe to automate) vs. what needs human judgment.
+        The validator reads both as a single checklist before any output ships.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Example &mdash; constraints + coverage</div>
+        <pre class="ds-detail-code">{
+  "rules": [
+    { "id": "no-invented-colors",
+      "severity": "error",
+      "check": "All color values must resolve to a token" },
+    { "id": "hero-display-only",
+      "severity": "error",
+      "check": "Display 1 typeface restricted to hero blades" },
+    { "id": "button-shape",
+      "severity": "warning",
+      "check": "Buttons use radius-pill unless overridden" }
+  ],
+  "coverage": {
+    "tokenized": ["color", "typography", "spacing", "radii"],
+    "uncovered": {
+      "illustration-style": "ask designer",
+      "motion-curves": "not yet tokenized",
+      "data-viz-palette": "pending review"
+    }
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay: Agent details -->
+  <div class="journey-overlay" id="agentOverlay" onclick="closeAgentOverlay(event)">
+    <div class="journey-overlay-card" data-agent="content">
+      <button class="journey-overlay-close" onclick="closeAgentOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f4dd;</span>
+        <span class="journey-overlay-title">Content Agent</span>
+      </div>
+      <div class="journey-overlay-body">
+        The <strong>Content Agent</strong> is responsible for populating every text slot in the page.
+        It pulls existing copy, product descriptions, and messaging from the CMS, then generates
+        new copy where gaps exist &mdash; adhering to brand voice rules, tone guidelines, and
+        character limits defined by the recipe&rsquo;s slot constraints.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Capabilities</div>
+        <pre class="ds-detail-code">{
+  "sources": ["CMS", "product catalog", "brand voice DB"],
+  "actions": [
+    "Fetch existing copy by page context",
+    "Generate headlines within slot maxLength",
+    "Adapt tone per audience segment",
+    "Localize content for region variants"
+  ],
+  "constraints": {
+    "maxHeadline": 60,
+    "maxSubhead": 120,
+    "voiceProfile": "salesforce-professional"
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card" data-agent="media">
+      <button class="journey-overlay-close" onclick="closeAgentOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f5bc;</span>
+        <span class="journey-overlay-title">Media Agent</span>
+      </div>
+      <div class="journey-overlay-body">
+        The <strong>Media Agent</strong> retrieves images, illustrations, and icons from the
+        Digital Asset Manager (DAM). It matches assets to layout slots based on required aspect ratios,
+        resolution, and content tags &mdash; ensuring every visual is on-brand and correctly sized
+        before it reaches the page.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Capabilities</div>
+        <pre class="ds-detail-code">{
+  "sources": ["DAM", "brand asset library", "icon set"],
+  "actions": [
+    "Search assets by content tags and context",
+    "Match aspect ratio to slot requirements",
+    "Auto-crop and resize for target breakpoint",
+    "Fallback to placeholder if no asset found"
+  ],
+  "constraints": {
+    "maxHeight": "620px",
+    "formats": ["webp", "svg", "png"],
+    "requiredAlt": true
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="journey-overlay-card" data-agent="seo">
+      <button class="journey-overlay-close" onclick="closeAgentOverlay(event, true)">&times;</button>
+      <div class="journey-overlay-header">
+        <span class="journey-overlay-icon">&#x1f50d;</span>
+        <span class="journey-overlay-title">SEO Agent</span>
+      </div>
+      <div class="journey-overlay-body">
+        The <strong>SEO Agent</strong> optimizes the final page for search engine visibility.
+        It validates heading hierarchy, generates meta descriptions, ensures proper semantic
+        HTML structure, and checks against keyword targets &mdash; all before the page ships.
+      </div>
+      <div class="ds-detail-example">
+        <div class="ds-detail-example-label">Capabilities</div>
+        <pre class="ds-detail-code">{
+  "actions": [
+    "Validate single H1 per page",
+    "Generate meta title and description",
+    "Check heading hierarchy (H1 → H2 → H3)",
+    "Add structured data / JSON-LD",
+    "Optimize image alt text for keywords",
+    "Verify canonical URL and Open Graph tags"
+  ],
+  "constraints": {
+    "metaTitleMax": 60,
+    "metaDescMax": 155,
+    "singleH1": true
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,121 @@
+<!-- ═══════════════════════ SLIDE 4 ═══════════════════════ -->
+<section class="slide slide-4" data-slide="4">
+  <div class="stagger slide-eyebrow">04 &mdash; The Path Forward</div>
+  <h1 class="stagger slide-title">What Is <span class="accent">Needed</span></h1>
+  <p class="stagger slide-subtitle">
+    To get from today&rsquo;s fragmented landscape to an agent-ready design system, these are the six foundational moves we need to make.
+  </p>
+
+  <div class="stagger roadmap-grid">
+
+    <!-- 1. CSS Architecture -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">1</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Redo CSS Architecture</h3>
+        <p class="roadmap-card-desc">
+          Rebuild our styling layer around semantic aliases and component-level hooks &mdash; with fallback states
+          baked in so any surface can be branded without rewriting CSS.
+        </p>
+        <ul class="roadmap-card-list">
+          <li>Semantic token aliases (<code>var(--color-on-surface-1)</code>) replacing raw hex</li>
+          <li>Component styling hooks for overrides without breaking internals</li>
+          <li>Fallback state tokens for graceful degradation across brands</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. Composable Components -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">2</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Create Composable Components</h3>
+        <p class="roadmap-card-desc">
+          Templatise blades and cards into composable building blocks. Fewer primitives, infinite combinations &mdash;
+          reduce catalog size and ambiguity.
+        </p>
+        <div class="roadmap-before-after">
+          <div class="roadmap-ba-col roadmap-ba--before">
+            <span class="roadmap-ba-label">Before</span>
+            <span class="roadmap-ba-value">25+ blades &middot; 15+ cards</span>
+          </div>
+          <div class="roadmap-ba-arrow">
+            <svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M12 1l7 7-7 7M1 8h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="roadmap-ba-col roadmap-ba--after">
+            <span class="roadmap-ba-label">After</span>
+            <span class="roadmap-ba-value">~5 composable templates</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Interactive Storybook & Docs -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">3</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Interactive Storybook &amp; Documentation</h3>
+        <p class="roadmap-card-desc">
+          Transform Storybook from a static visual catalog into an interactive, API-driven platform
+          that serves both humans and machines.
+        </p>
+        <ul class="roadmap-card-list">
+          <li>Interaction tests that LLMs can invoke to validate rendered output</li>
+          <li>Prop/slot discovery APIs for agents to query component capabilities</li>
+          <li>Visual regression wired into agent feedback loops for self-correction</li>
+          <li>Vendor-facing docs enabling partners to build without hand-holding</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. Unified Library -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">4</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Unify Into a Single Library</h3>
+        <p class="roadmap-card-desc">
+          Consolidate scattered component sets into one React-based library &mdash; a single bundle
+          that every surface imports from.
+        </p>
+        <div class="roadmap-card-highlight">
+          <span class="roadmap-highlight-label">Goal</span>
+          <span class="roadmap-highlight-value">One library, one tech stack, one source of truth across all MFEs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. LLM Routing Logic -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">5</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Build LLM Routing Logic</h3>
+        <p class="roadmap-card-desc">
+          Create the machine-readable contracts &mdash; schema, recipes, constraints &mdash; that let LLMs
+          route prompts to the right components and assemble pages autonomously.
+        </p>
+        <ul class="roadmap-card-list">
+          <li>Intent-to-recipe mapping for adaptive website generation</li>
+          <li>Token &amp; constraint validation before render</li>
+          <li>Pluggable agent architecture for content, media, SEO, and beyond</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. Agent-Powered Migration -->
+    <div class="roadmap-card">
+      <div class="roadmap-card-num">6</div>
+      <div class="roadmap-card-body">
+        <h3 class="roadmap-card-title">Agent-Powered Migration</h3>
+        <p class="roadmap-card-desc">
+          Use the agents and routing logic we&rsquo;ve built to accelerate migration of existing surfaces &mdash;
+          turning a multi-quarter effort into weeks.
+        </p>
+        <div class="roadmap-card-highlight">
+          <span class="roadmap-highlight-label">Outcome</span>
+          <span class="roadmap-highlight-value">Agents scan legacy pages, map to composable templates, and generate migration PRs automatically</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

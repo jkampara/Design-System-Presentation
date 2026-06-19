@@ -14,20 +14,20 @@
       <div class="ds-flow-node-badge">Parent System</div>
       <div class="ds-flow-node-icon">&#x1f3db;</div>
       <div class="ds-flow-node-title">SLDS 2 &mdash; Cosmos</div>
-      <div class="ds-flow-node-desc">Salesforce Lightning Design System. Provides foundational design tokens &mdash; colors, typography, spacing, iconography &mdash; used by every subsystem.</div>
+      <div class="ds-flow-node-desc">Salesforce Lightning Design System. Provides foundational design tokens and a component library. Some subsystems consume both foundations and components; others inherit only the foundations they need.</div>
       <div class="ds-flow-node-chips">
         <span class="ds-flow-chip ds-flow-chip--solid">Colors</span>
         <span class="ds-flow-chip ds-flow-chip--solid">Typography</span>
         <span class="ds-flow-chip ds-flow-chip--solid">Spacing</span>
         <span class="ds-flow-chip ds-flow-chip--solid">Iconography</span>
-        <span class="ds-flow-chip ds-flow-chip--dotted">Components</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Components</span>
       </div>
     </div>
 
     <!-- Connector: SLDS → WES -->
     <div class="ds-flow-connector ds-flow-connector--vertical">
       <div class="ds-flow-connector-line ds-flow-connector-line--solid"></div>
-      <div class="ds-flow-connector-label">Foundations inherited</div>
+      <div class="ds-flow-connector-label">Select foundations inherited</div>
       <div class="ds-flow-connector-line ds-flow-connector-line--solid"></div>
     </div>
 
@@ -39,7 +39,7 @@
       <div class="ds-flow-node-desc">
         Designed for a unified experience across 108+ Salesforce marketing sites and 417,000+ pages.
         Built to unify post-acquisition brands (Mulesoft, Tableau, Quip) under one cohesive look.
-        Uses SLDS foundations + its own component library.
+        Inherits select SLDS foundations (colors, typography) but builds its own component library on LWC.
       </div>
       <div class="ds-flow-node-chips">
         <span class="ds-flow-chip ds-flow-chip--solid">Foundations</span>

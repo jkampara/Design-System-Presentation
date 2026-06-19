@@ -1,10 +1,11 @@
 const SLIDE_TITLES = [
   'The Agent-First Design System',
   'The Paradigm Shift',
+  'The Landscape',
+  'The Ecosystem',
+  'Current State',
+  'The Path Forward',
   'How It Actually Works',
-  'Where Are We Today',
-  'What Is Needed',
-  'The DS Package',
   'Thank You'
 ];
 
@@ -18,6 +19,46 @@ const navBar = document.querySelector('.nav-bar');
 let transitioning = false;
 
 navBar.classList.add('nav-hidden');
+
+const SLIDE_SLUGS = [
+  'title',
+  'paradigm-shift',
+  'landscape',
+  'ecosystem',
+  'current-state',
+  'path-forward',
+  'how-it-works',
+  'thank-you'
+];
+
+function getSlideFromHash() {
+  var hash = window.location.hash.replace('#', '');
+  if (!hash) return 0;
+  var idx = SLIDE_SLUGS.indexOf(hash);
+  if (idx !== -1) return idx;
+  var num = parseInt(hash.replace('slide-', ''), 10);
+  return (!isNaN(num) && num >= 0 && num < slides.length) ? num : 0;
+}
+
+var startSlide = getSlideFromHash();
+if (startSlide > 0) {
+  slides[0].classList.remove('active');
+  slides[startSlide].classList.add('active');
+  dots[0].classList.remove('active');
+  dots[startSlide].classList.add('active');
+  current = startSlide;
+  if (current > 0 && current < slides.length - 1) {
+    navBar.classList.remove('nav-hidden');
+    label.textContent = current + ' / ' + (slides.length - 2) + ' \u2014 ' + SLIDE_TITLES[current];
+  }
+  btnPrev.disabled = current === 0;
+  btnNext.disabled = current === slides.length - 1;
+}
+
+window.addEventListener('hashchange', function() {
+  var idx = getSlideFromHash();
+  if (idx !== current) goToSlide(idx);
+});
 
 function goToSlide(index) {
   if (transitioning || index === current || index < 0 || index >= slides.length) return;
@@ -45,6 +86,7 @@ function goToSlide(index) {
   dots[index].classList.add('active');
 
   current = index;
+  history.replaceState(null, '', '#' + SLIDE_SLUGS[current]);
 
   if (current === 0 || current === slides.length - 1) {
     navBar.classList.add('nav-hidden');

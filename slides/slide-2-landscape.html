@@ -1,0 +1,148 @@
+<!-- ═══════════════════════ SLIDE — DS Landscape ═══════════════════════ -->
+<section class="slide slide-landscape" data-slide="2">
+  <div class="stagger slide-eyebrow">02 &mdash; The Landscape</div>
+  <h1 class="stagger slide-title">Design Systems at <span class="accent">Salesforce</span></h1>
+  <p class="stagger slide-subtitle">
+    Multiple design systems exist across Salesforce, each built on shared foundations but diverging at the component layer.
+    Here&rsquo;s where we sit &mdash; and what&rsquo;s missing.
+  </p>
+
+  <div class="stagger ds-flow">
+
+    <!-- Row 1: SLDS -->
+    <div class="ds-flow-node ds-flow-node--slds" id="node-slds">
+      <div class="ds-flow-node-badge">Parent System</div>
+      <div class="ds-flow-node-icon">&#x1f3db;</div>
+      <div class="ds-flow-node-title">SLDS 2 &mdash; Cosmos</div>
+      <div class="ds-flow-node-desc">Salesforce Lightning Design System. Provides foundational design tokens &mdash; colors, typography, spacing, iconography &mdash; used by every subsystem.</div>
+      <div class="ds-flow-node-chips">
+        <span class="ds-flow-chip ds-flow-chip--solid">Colors</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Typography</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Spacing</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Iconography</span>
+        <span class="ds-flow-chip ds-flow-chip--dotted">Components</span>
+      </div>
+    </div>
+
+    <!-- Connector: SLDS → WES -->
+    <div class="ds-flow-connector ds-flow-connector--vertical">
+      <div class="ds-flow-connector-line ds-flow-connector-line--solid"></div>
+      <div class="ds-flow-connector-label">Foundations inherited</div>
+      <div class="ds-flow-connector-line ds-flow-connector-line--solid"></div>
+    </div>
+
+    <!-- Row 2: WES -->
+    <div class="ds-flow-node ds-flow-node--wes" id="node-wes">
+      <div class="ds-flow-node-badge">Subsystem</div>
+      <div class="ds-flow-node-icon">&#x1f310;</div>
+      <div class="ds-flow-node-title">WES &mdash; Website Experience Subsystem</div>
+      <div class="ds-flow-node-desc">
+        Designed for a unified experience across 108+ Salesforce marketing sites and 417,000+ pages.
+        Built to unify post-acquisition brands (Mulesoft, Tableau, Quip) under one cohesive look.
+        Uses SLDS foundations + its own component library.
+      </div>
+      <div class="ds-flow-node-chips">
+        <span class="ds-flow-chip ds-flow-chip--solid">Foundations</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Component Library (LWC)</span>
+        <span class="ds-flow-chip ds-flow-chip--solid">Figma Design System Docs</span>
+      </div>
+    </div>
+
+    <!-- Connector: WES → DMT row -->
+    <div class="ds-flow-connector ds-flow-connector--vertical">
+      <div class="ds-flow-connector-line ds-flow-connector-line--solid"></div>
+      <div class="ds-flow-connector-label">Guidelines &amp; foundations only</div>
+      <div class="ds-flow-connector-line ds-flow-connector-line--dotted"></div>
+    </div>
+
+    <!-- Row 3: DMT split -->
+    <div class="ds-flow-split">
+
+      <div class="ds-flow-node ds-flow-node--dmt" id="node-pb">
+        <div class="ds-flow-node-badge">Consumer</div>
+        <div class="ds-flow-node-icon">&#x1f3d7;</div>
+        <div class="ds-flow-node-title">DMT PageBuilder</div>
+        <div class="ds-flow-node-desc">
+          Uses WES color, typography, and guidelines to stay visually consistent.
+          Cannot use WES components &mdash; PageBuilder runs on <strong>Nunjucks</strong> with a different rendering pipeline.
+          Builds its own component set.
+        </div>
+        <div class="ds-flow-node-chips">
+          <span class="ds-flow-chip ds-flow-chip--solid">Nunjucks</span>
+          <span class="ds-flow-chip ds-flow-chip--solid">Own Components</span>
+        </div>
+        <div class="ds-flow-node-annotation">
+          <span class="ds-flow-annotation-icon">&#x26a0;</span>
+          <span>Tech stack mismatch &mdash; WES LWC components are not compatible</span>
+        </div>
+      </div>
+
+      <div class="ds-flow-node ds-flow-node--dmt" id="node-mfe">
+        <div class="ds-flow-node-badge">Consumer</div>
+        <div class="ds-flow-node-icon">&#x2699;</div>
+        <div class="ds-flow-node-title">MFEs (IDX, AFE, OGX)</div>
+        <div class="ds-flow-node-desc">
+          Follow WES guidelines for visual consistency but use <strong>React</strong>.
+          Maintain a separate library &ldquo;WES Components&rdquo; &mdash; managed by MFE engineers, not WES developers.
+        </div>
+        <div class="ds-flow-node-chips">
+          <span class="ds-flow-chip ds-flow-chip--solid">React</span>
+          <span class="ds-flow-chip ds-flow-chip--solid">Own Components</span>
+        </div>
+        <div class="ds-flow-node-annotation">
+          <span class="ds-flow-annotation-icon">&#x26a0;</span>
+          <span>Own component library &mdash; diverges over time without WES governance</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Shared Figma note -->
+    <div class="ds-flow-shared-note">
+      <span class="ds-flow-shared-note-icon">&#x1f3a8;</span>
+      Both PageBuilder and MFEs share a single <strong>Figma Design System file</strong> for visual consistency
+
+    </div>
+
+    <!-- Connector: DMT row → DMS -->
+    <div class="ds-flow-connector ds-flow-connector--vertical">
+      <div class="ds-flow-connector-line ds-flow-connector-line--dotted"></div>
+      <div class="ds-flow-connector-label ds-flow-connector-label--accent">What we want to build</div>
+      <div class="ds-flow-connector-line ds-flow-connector-line--dotted"></div>
+    </div>
+
+    <!-- Row 4: DMS (the goal) -->
+    <div class="ds-flow-node ds-flow-node--dms" id="node-dms">
+      <div class="ds-flow-node-badge ds-flow-node-badge--accent">New</div>
+      <div class="ds-flow-node-icon">&#x1f680;</div>
+      <div class="ds-flow-node-title">DMS &mdash; Digital Marketing Subsystem</div>
+      <div class="ds-flow-node-desc">
+        Follows WES guidelines for brand consistency. Builds its own composable, React-based component library
+        with semantic tokens, interactive documentation, and machine-readable contracts for LLM consumption.
+      </div>
+      <div class="ds-flow-node-chips">
+        <span class="ds-flow-chip ds-flow-chip--accent">Semantic Tokens</span>
+        <span class="ds-flow-chip ds-flow-chip--accent">React Components</span>
+        <span class="ds-flow-chip ds-flow-chip--accent">LLM-Ready Docs</span>
+        <span class="ds-flow-chip ds-flow-chip--accent">Recipes &amp; Schema</span>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="ds-flow-legend">
+      <div class="ds-flow-legend-item">
+        <span class="ds-flow-legend-line ds-flow-legend-line--solid"></span>
+        <span>Directly used / inherited</span>
+      </div>
+      <div class="ds-flow-legend-item">
+        <span class="ds-flow-legend-line ds-flow-legend-line--dotted"></span>
+        <span>Guidelines only / not components</span>
+      </div>
+      <div class="ds-flow-legend-item">
+        <span class="ds-flow-chip ds-flow-chip--dotted" style="font-size:10px;padding:2px 8px;">Dotted chip</span>
+        <span>Not consumed by downstream</span>
+      </div>
+    </div>
+
+  </div>
+</section>

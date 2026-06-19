@@ -441,6 +441,280 @@ body {
 
 
 /* ═══════════════════════════════════════════════
+   SLIDE — DS Landscape Flowchart
+═══════════════════════════════════════════════ */
+.slide-landscape {
+  padding: 40px 80px 100px;
+  justify-content: flex-start;
+}
+
+.ds-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Flow nodes */
+.ds-flow-node {
+  width: 100%;
+  background: var(--color-surface-1);
+  border: 1.5px solid var(--color-border-1);
+  border-radius: var(--radius-2);
+  padding: 20px 24px;
+  position: relative;
+  text-align: center;
+}
+
+.ds-flow-node--slds {
+  border-color: var(--color-border-accent);
+  border-width: 2px;
+}
+
+.ds-flow-node--wes {
+  border-color: var(--color-border-1);
+}
+
+.ds-flow-node--dmt {
+  flex: 1;
+  text-align: left;
+}
+
+.ds-flow-node--dms {
+  border: 2px solid var(--color-fill-accent);
+  background: linear-gradient(180deg, rgba(6,106,254,0.04) 0%, var(--color-surface-1) 100%);
+}
+
+.ds-flow-node-badge {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-family: var(--font-family-body);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-container-1);
+  color: var(--color-on-surface-3);
+  border: 1px solid var(--color-border-1);
+}
+
+.ds-flow-node-badge--accent {
+  background: var(--color-fill-accent);
+  color: var(--color-on-fill-accent);
+  border-color: var(--color-fill-accent);
+}
+
+.ds-flow-node-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.ds-flow-node-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-demi);
+  color: var(--color-on-surface-1);
+  margin-bottom: 6px;
+}
+
+.ds-flow-node-desc {
+  font-size: var(--font-size-12);
+  color: var(--color-on-surface-2);
+  line-height: 1.55;
+  max-width: 700px;
+  margin: 0 auto 10px;
+}
+
+.ds-flow-node--dmt .ds-flow-node-desc {
+  margin: 0 0 10px;
+}
+
+/* Chips inside nodes */
+.ds-flow-node-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.ds-flow-node--dmt .ds-flow-node-chips {
+  justify-content: flex-start;
+}
+
+.ds-flow-chip {
+  font-family: var(--font-family-body);
+  font-size: 11px;
+  font-weight: var(--font-weight-demi);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-container-1);
+  color: var(--color-on-surface-2);
+}
+
+.ds-flow-chip--solid {
+  border: 1px solid var(--color-border-accent);
+  color: var(--color-fill-accent);
+}
+
+.ds-flow-chip--dotted {
+  border: 1.5px dashed var(--color-border-neutral);
+  color: var(--color-on-surface-3);
+  text-decoration: line-through;
+}
+
+.ds-flow-chip--accent {
+  background: rgba(6,106,254,0.08);
+  border: 1px solid var(--color-fill-accent);
+  color: var(--color-fill-accent);
+}
+
+/* Annotation callouts */
+.ds-flow-node-annotation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-2);
+  background: var(--color-fill-warning-1);
+  border: 1px solid var(--color-border-warning);
+  font-size: 11px;
+  color: var(--color-on-surface-1);
+  line-height: 1.4;
+}
+
+.ds-flow-annotation-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Vertical connectors */
+.ds-flow-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 4px 0;
+}
+
+.ds-flow-connector-line {
+  width: 2px;
+  height: 16px;
+}
+
+.ds-flow-connector-line--solid {
+  background: var(--color-fill-accent);
+}
+
+.ds-flow-connector-line--dotted {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-on-surface-3) 0px,
+    var(--color-on-surface-3) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.ds-flow-connector-label {
+  font-family: var(--font-family-body);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-on-surface-3);
+  padding: 3px 12px;
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-1);
+  border-radius: var(--radius-pill);
+}
+
+.ds-flow-connector-label--accent {
+  color: var(--color-fill-accent);
+  border-color: var(--color-fill-accent);
+}
+
+/* Split row (PageBuilder + MFEs side by side) */
+.ds-flow-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Shared note between split cards */
+.ds-flow-shared-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--color-on-surface-2);
+  background: var(--color-surface-container-1);
+  border: 1px solid var(--color-border-1);
+  border-radius: var(--radius-pill);
+}
+
+.ds-flow-shared-note-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Legend */
+.ds-flow-legend {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border-radius: var(--radius-2);
+  background: var(--color-surface-container-1);
+  border: 1px solid var(--color-border-1);
+}
+
+.ds-flow-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--color-on-surface-3);
+}
+
+.ds-flow-legend-line {
+  width: 24px;
+  height: 2px;
+  flex-shrink: 0;
+}
+
+.ds-flow-legend-line--solid {
+  background: var(--color-fill-accent);
+}
+
+.ds-flow-legend-line--dotted {
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-on-surface-3) 0px,
+    var(--color-on-surface-3) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+@media (max-width: 768px) {
+  .ds-flow-split { grid-template-columns: 1fr; }
+  .ds-flow-legend { flex-direction: column; gap: 8px; align-items: flex-start; }
+}
+
+
+/* ═══════════════════════════════════════════════
    SLIDE 2 — Implementation Reality (Architecture Diagram)
 ═══════════════════════════════════════════════ */
 .slide-2 {
